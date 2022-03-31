@@ -5,6 +5,8 @@ class Product < ApplicationRecord
 
     validates :title, uniqueness: true
 
+    validates :title, length: { minimum: 10, message: "en az on karakter olmalı!" }
+
     validates :image_url, allow_blank: true, format: {
         with: %r{\.(gif|jpg|png)\z}i,
         message: 'dosya türü gif, jpg ya da png olmalı.'
