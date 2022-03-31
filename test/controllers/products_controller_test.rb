@@ -46,4 +46,11 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to products_url
   end
+
+  test "should edit name to Furkan" do
+    patch product_url(@product), params: { product: { description: @product.description, image_url: @product.image_url, price: @product.price, title: "Furkan Erdem" } }
+    assert_redirected_to product_url(@product)
+    get products_url
+    assert_select 'h1', "Furkan Erdem"
+  end
 end
