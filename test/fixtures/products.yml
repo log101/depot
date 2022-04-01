@@ -13,7 +13,7 @@ two:
   price: 9.99
 
 ruby:
-  title: Programming
+  title: Programming Ruby 1.9
   description: Fastest growing
   price: 49.50
   image_url: ruby.jpg
