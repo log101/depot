@@ -22,7 +22,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_select 'td', 'Programming Ruby 1.9'
+    assert_select 'td', '1 tane Programming Ruby 1.9'
 
   end
 

@@ -8,6 +8,9 @@ class CartsController < ApplicationController
 
   # GET /carts/1 or /carts/1.json
   def show
+    if wrong_cart?
+      redirect_to carts_url, notice: "Unauthorized!"
+    end
   end
 
   # GET /carts/new
@@ -73,5 +76,9 @@ class CartsController < ApplicationController
     def invalid_cart
       logger.error "Attemp to access invalid cart #{params[:id]}"
       redirect_to store_index_url, notice: 'Invalid cart'
+    end
+
+    def wrong_cart?
+      @cart.id != session[:cart_id]
     end
 end
