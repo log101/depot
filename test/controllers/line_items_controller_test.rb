@@ -22,7 +22,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_select 'li', 'Programming Ruby 1.9'
+    assert_select 'td', 'Programming Ruby 1.9'
 
   end
 
@@ -34,11 +34,6 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
   test "should get edit" do
     get edit_line_item_url(@line_item)
     assert_response :success
-  end
-
-  test "should update line_item" do
-    patch line_item_url(@line_item), params: { line_item: { cart_id: @line_item.cart_id, product_id: @line_item.product_id } }
-    assert_redirected_to line_item_url(@line_item)
   end
 
   test "should destroy line_item" do
