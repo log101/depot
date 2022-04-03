@@ -1,7 +1,14 @@
 class Product < ApplicationRecord
-    has_many :line_items
+    has_many :line_items, autosave: true
 
     before_destroy :ensure_not_referenced_by_any_line_item
+
+    after_update do
+        current_item = line_items.find_by(product_id: id)
+        if current_item
+            current_item.update(product_id: id, price: price)
+        end
+    end
 
     validates :title, :description, :image_url, presence: true
 

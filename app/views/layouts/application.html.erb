@@ -13,8 +13,11 @@
       <h1><%= @page_title %></h1>
     </header>
     <section class="content">
-      <nav class="side_nav">
-      <p style="color: white;"><%= Time.now.asctime %></p>
+      <nav class="side_nav" id="nav">
+        <div id="cart" class="carts">
+            <%= render_if @cart && @cart.line_items.any?, @cart %>
+          </div>
+        <p style="color: white;"><%= Time.now.asctime %></p>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/questions">Questions</a></li>

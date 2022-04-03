@@ -1,11 +1,11 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: [:create, :destroy, :update]
   before_action :set_line_item, only: %i[ show edit update destroy ]
 
   # GET /line_items or /line_items.json
   def index
-    @line_items = LineItem.all
+    @line_items = LineItem.all.order(:product_id)
   end
 
   # GET /line_items/1 or /line_items/1.json
@@ -29,7 +29,8 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         clear_counter
-        format.html { redirect_to @line_item.cart }
+        format.html { redirect_to store_index_url }
+        format.js { @current_item = @line_item }
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,16 +59,10 @@ class LineItemsController < ApplicationController
     else
       @line_item.update(quantity: @line_item.quantity - 1)
     end
-    @cart = Cart.find(session[:cart_id])
 
     respond_to do |format|
-      if @cart.line_items.empty?
         format.html { redirect_to store_index_url, notice: "Item is removed from the cart." }
         format.json { head :no_content }
-      else
-        format.html { redirect_to @cart, notice: "Item is removed from the cart." }
-        format.json { head :no_content }
-      end
     end
   end
 
