@@ -60,3 +60,16 @@
       }
     }
   }
+
+@keyframes product-highlight {
+    0% {
+        background: #8f8;
+    }
+    100% {
+        background: none;
+    }
+}
+
+.product-highlight {
+    animation: line-item-highlight 1s;
+}

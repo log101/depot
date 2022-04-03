@@ -45,7 +45,8 @@ class ProductsController < ApplicationController
 
         @products = Product.all.order(:title)
         ActionCable.server.broadcast 'products',
-          html: render_to_string('store/index', layout: false)
+          html: render_to_string('store/index', layout: false),
+          highlight: @product.id
         
         ActionCable.server.broadcast 'line_items',
           html: render_to_string('carts/show', layout: false)

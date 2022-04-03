@@ -42,7 +42,7 @@ class LineItemsController < ApplicationController
   # PATCH/PUT /line_items/1 or /line_items/1.json
   def update
     respond_to do |format|
-      if @line_item.update(line_item_params)
+      if @line_item.update(quantity: @line_item.quantity - 1)
         format.html { redirect_to line_item_url(@line_item), notice: "Line item was successfully updated." }
         format.json { render :show, status: :ok, location: @line_item }
       else
@@ -62,6 +62,7 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
         format.html { redirect_to store_index_url, notice: "Item is removed from the cart." }
+        format.js
         format.json { head :no_content }
     end
   end

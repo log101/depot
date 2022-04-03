@@ -1,0 +1,15 @@
+<div id="product-<%= product.id %>">
+<li>
+<%= link_to line_items_path(product_id: product), method: :post do %>
+    <%= image_tag(product.image_url) %>
+<% end %>
+<h2><%= product.title %></h2>
+<p>
+    <%= sanitize(product.description) %>
+    <%= button_to "Add to cart", line_items_path(product_id: product), remote: true %>
+</p>
+<div class="price">
+    <%= number_to_currency(product.price) %>
+</div>
+</li>
+</div>

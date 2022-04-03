@@ -1,3 +1,4 @@
+<% if @cart.line_items.any? %>
 <article>
   <% if notice %>
     <aside id="notice"><%= notice %></aside>
@@ -13,5 +14,7 @@
     </tfoot>
   </table>
   <%= button_to 'Empty cart', cart, method: :delete,
-  data: { confirm: 'Are you sure?' } %>
+  data: { confirm: 'Are you sure?' },
+  remote: true %>
 </article>
+<% end %>
