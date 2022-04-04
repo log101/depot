@@ -45,28 +45,26 @@ class ProductsController < ApplicationController
 
         @products = Product.all.order(:title)
         ActionCable.server.broadcast 'products',
-        html: render_to_string('store/index', layout: false),
-        highlight: @product.id
-
+          html: render_to_string('store/index', layout: false),
+          highlight: @product.id
+        
         ActionCable.server.broadcast 'line_items',
-        html: render_to_string('carts/show', layout: false)
+          html: render_to_string('carts/show', layout: false)
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
-
   def who_bought
     @product = Product.find(params[:id])
     @latest_order = @product.orders.order(:updated_at).last
     if stale?(@latest_order)
-      respond_to do |format|
-        format.atom
-      end
+    respond_to do |format|
+    format.atom
     end
-  end
-  
+    end
+    end
   # DELETE /products/1 or /products/1.json
   def destroy
     @product.destroy
@@ -78,13 +76,13 @@ class ProductsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_product
-    @product = Product.find(params[:id])
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_product
+      @product = Product.find(params[:id])
+    end
 
-  # Only allow a list of trusted parameters through.
-  def product_params
-    params.require(:product).permit(:title, :description, :image_url, :price)
-  end
+    # Only allow a list of trusted parameters through.
+    def product_params
+      params.require(:product).permit(:title, :description, :image_url, :price)
+    end
 end

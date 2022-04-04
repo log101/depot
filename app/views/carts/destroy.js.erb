@@ -1,2 +1,2 @@
 cart = document.getElementById("cart")
-if (cart) cart.style.display = "none"
+cart.innerHTML = "<%= j render(@cart) %>"
