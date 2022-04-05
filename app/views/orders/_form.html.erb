@@ -21,6 +21,9 @@
     <%= form.label :address %>
     <%= form.text_area :address, rows: 3, cols: 40%>
   </div>
+  <div class="field">
+    <%= form.hidden_field :ship_date, value: DateTime.now %>
+  </div>
 
   <div id='pay-type-component'></div>
 

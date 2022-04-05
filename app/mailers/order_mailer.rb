@@ -11,11 +11,12 @@ class OrderMailer < ApplicationMailer
     mail to: order.email, subject: "Prag store"
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.order_mailer.shipped.subject
-  #
+  def updated(order)
+    @order = order
+
+    mail to: order.email, subject: "Order Date Update"
+  end
+  
   def shipped(order)
     @order = order
     
